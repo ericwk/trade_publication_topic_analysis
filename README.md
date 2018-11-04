@@ -19,4 +19,24 @@ A range of text preprocessing options from NLTK and SpaCy, a count vectorizer an
 
 Using SpaCy to change upper case words to lower case, remove punctuation and remove stop words and then tokenizing the text, followed by vectorizing using the tfidf vectorizer for text preprocessing, followed by topic modeling using a non-negative matrix factorization (NMF) model produced the most meaningful and best differentiated topics.
 
-Topic "importances" over time were determined by plotting the probabilities output by the NMF model after normalizing for individual articles from the trade magazine versus article publication dates.  These plots were visualized by creating Pandas dataframes of the
+Topic "importances" over time were determined by plotting the topic probabilities output by the NMF model after normalizing for individual articles from the trade magazine versus article publication dates.  These plots were visualized by creating Pandas dataframes of the probabilities grouped by month for each topic with a column for each topic and a row for each month and importing the data into Tableau.
+
+Plots for four example topics can be seen below.
+
+![image](Images/topic_examples.png)
+
+Topic 3 showed strong importance until 2016 when importance fell away.  Topic 4 showed weak importance throughout the five year period from which data was taken.  These are examples of topics that would not be good to consider for exploration for market development.
+
+Topic 1 showed consistently strong importance throughout the five year period from which the data was taken.  Topic 2 showed very strong importance in August 2018 indicating that it may represent a newly developing topic important to the market.  These two topics would be good for further exploration for market development.
+
+Subject matter for the two topics identified as good for exploration was identified using the topic vocabulary from the NMF model and from the article titles and text for the articles in which the topic was important.  Some of this information can be seen for each  of these two topics below.
+
+![image](Images/consistently_important_topic.png)
+
+![image](Images/newly_important_topic.png)
+
+Subjects identified for these two topics are:
+* Topic 1 - Adhesives and inks with functionality from exposure to UV or visible light.
+* Topic 2 - Reducing the weight of automobiles by replacing metal fasteners with adhesives.
+
+This information can be used to target specific market development exploration activities.  Authors of the articles that produce the strong importance for these topics are included in the Mongo database.  They are likely to be good expert contacts for further information as part of this exploration.
