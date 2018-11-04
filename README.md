@@ -8,6 +8,15 @@ It is reasonable to assume that topics important to a market will appear more fr
 
 Trade publications focus on specific industrial markets and selecting those focused on a market that is thought to be promising for development can be an initial step in choosing text likely to provide insights.  I have some experience/expertise in the industrial adhesives market so I chose this industrial market for the focus of this project.  To support proof of concept, I chose a trade magazine titled "Adhesive & Sealants Industry" as the corpus for the project and decided to use issues (the magazine is published monthly) from the last five years (August 2013 - August 2018).  The goal for the project was to identify topics from the corpus with strong importance (high, consistent frequency) or that are new (appeared only recently) using NLP.
 
-Python code for the project can be found in Jupyter Notebooks in the **Notebooks** folder.  Two notebooks are included, **trade_topic_scraping.ipynb** containing code for scraping text from the internet to serve as the corpus for the project, and **trade_topic_analysis.ipynb** containing code for the NLP analysis.
+Python code for the project can be found in Jupyter Notebooks in the **Notebooks** folder.  Two notebooks are included, **trade_topic_scraping.ipynb** containing code for scraping text from the internet and storing it in a Mongo NoSQL database to serve as the corpus for the project, and **trade_topic_analysis.ipynb** containing code for the NLP analysis.
 
-Presentation slides of the findings from the project can be found in the Presentation folder in pdf format.
+Presentation slides of the findings from the project can be found in the **Presentation** folder in pdf format.
+
+## Findings
+A range of text preprocessing options from NLTK and SpaCy, a count vectorizer and tfidf vectorizer, and LDA and NMF models were evaluated on the corpus via the topic optimization process shown below.
+
+![image](Images/topic_optimization.png)
+
+Using SpaCy to change upper case words to lower case, remove punctuation and remove stop words and then tokenizing the text, followed by vectorizing using the tfidf vectorizer for text preprocessing, followed by topic modeling using a non-negative matrix factorization (NMF) model produced the most meaningful and best differentiated topics.
+
+Topic "importances" over time were determined by plotting the probabilities output by the NMF model after normalizing for individual articles from the trade magazine versus article publication dates.  These plots were visualized by creating Pandas dataframes of the
