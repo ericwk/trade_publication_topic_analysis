@@ -74,7 +74,7 @@ The **get_articles function**.
   * Creates an empty dictionary in which to store scraped information.
   * Scrapes title, date, author and text body for the article from the web page and stores them in the dictionary.
   * Includes "missing information" messages in the dictionary if any of the above values are not present for an article.
-  * Inserts the dictionary as a record in the mongo "adhesives" database "adhesives" collection.
+  * Inserts the dictionary as a record in the mongo "adhesives" database "articles" collection.
   * Prints the article title.
 
 The next five code cells:
@@ -86,7 +86,7 @@ The next five code cells:
 * Gets records for articles in the current month magazine issue.
 
 The **get_archived_article_urls function**:
-* Takes the current month in the format like "August 2018" and the "oldest issue" as the number of past months to be scraped as an integer as input parameters.  This defines the range of issues to be scraped. The web site uses the number of months into the past to identify past month issues.
+* Takes the current month in the format like "August 2018" and the "oldest issue" as the number of past months to be scraped as an integer as input parameters.  This defines the range of issues to be scraped. The web site uses an integer representing the number of months into the past to identify past month issues.
 * Uses the selenium driver to navigate to the bottom of the home page (opens source code for current issue page).
 * Uses the selenium driver to navigate to the current issue web page.
 * Creates an empty list in which to hold article urls.
@@ -105,9 +105,9 @@ The next five code cells:
 * Starts the selenium driver using the "start_selenium_driver" function.
 * Logs into the Adhesives & Sealants web site using the "login_adhesives" function.
 * Gets the list of unique article urls from the the past 60 months magazine issues (with current month of August 2018) using the "get_archived_article_urls" function.
-* Prints the count or article records present in the mongo database.
+* Prints the count of article records present in the mongo database.
 
-Final code for analysis of the corpus made up of the combination of text in the "text_body" field in each record in the "articles" collection of the mongo "adhesives" data base created by the code in the notebook "trade_topic_scraping.ipynb" is given in the notebook **trade_topic_analysis.ipynb**.  Libraries and modules need to run the code are given at the beginning of the notebook.  Modules are included that are not used in this final code version and represent preprocessing and modeling options that were evaluated but found not to provide results as useful as those used.  Code and analysis of this evaluation is not included in the notebook to simplify the project presentation.  These unused modules are:
+Final code for analysis of the corpus made up of the combination of text in the "text_body" field in each record in the "articles" collection of the mongo "adhesives" data base created by the code in the notebook "trade_topic_scraping.ipynb" is given in the notebook **trade_topic_analysis.ipynb**.  Libraries and modules needed to run the code are given at the beginning of the notebook.  Modules are included that are not used in this final code version and represent preprocessing and modeling options that were evaluated but found not to provide results as useful as those used.  Code and analysis of this evaluation is not included in the notebook to simplify the project presentation.  These unused modules are:
 * nltk (except for stopwords library)
 * sklearn.feature_extraction.text.CountVectorizer
 * sklearn.decomposition.LatentDirichletAllocation
@@ -115,7 +115,7 @@ Final code for analysis of the corpus made up of the combination of text in the 
 
 The **spacy_tokenizer function**:
 * Takes a corpus of text as the input parameter "sentence".
-* Creates a list of stopwords by combining the list give by scikit learn and by nltk.
+* Creates a list of stopwords by combining the list given by scikit learn and by nltk.
 * Creates a list of punctuation symbols using the list provided by the Python string library and adding some custom symbols found in the project corpus.
 * Tokenizes the corpus using SpaCy tokenizer.
 * Converts upper case words to lower case except for those identified as pronouns by SpaCy.
@@ -129,7 +129,7 @@ The **vectorize_and_model function**:
 * Returns fit model
 
 The **display_topics fuction**:
-* Takes a model, feature names (from vectorizer), and number of topic vocabulary words to return ("no_top_words").
+* Takes a model, feature names (from vectorizer), and number of topic vocabulary words to return ("no_top_words") as input parameters.
 * Loops through topics from the model and:
   * Prints Topic Number
   * Prints topic vocabulary
@@ -144,14 +144,14 @@ The **"NMF Analysis"** code cells:
 * Defines tfidf vectorizer with parameters.
 * Defines NMF model with parameters.
 
-The **View Model Output"** code cells:
-* Runs the "vectorize_and_model" function using the tfidf vectorizer and nmf model fro the "NMF Analysis" code on the corpus from the "Read Text Data" code.
+The **"View Model Output"** code cells:
+* Runs the "vectorize_and_model" function using the tfidf vectorizer and nmf model from the "NMF Analysis" code on the corpus from the "Read Text Data" code.
 * Prints the shape of the model output matrix.
 * Prints the topic vocabularies.
 * Prints the model output data matrix.
 * Prints the column (topic) sums from the output data matrix.
 
-The **Graphical Topic Analysis** code cells:
+The **"Graphical Topic Analysis"** code cells:
 * Normalizes the model output topic "importances" by dividing each topic importance by the total of the document importances.
 * Converts the normalized model output matrix to a Pandas dataframe.
 * Opens a cursor instance to read from the mongo database.
@@ -167,7 +167,7 @@ The **Graphical Topic Analysis** code cells:
 
 Important topic examples were selected visually by looking at the displayed topic importance plots.
 
-The **Evaluate Document Details for Consistent and New Importance Topics and Output for Visualization** code:
+The **"Evaluate Document Details for Consistent and New Importance Topics and Output for Visualization"** code cells:
 * Displays article titles for topic identified as "Newly Important" (topic 40).
 * Displays topic importance plot.
 * Creates new dataframe with topic importances for "Newly Important" (topic 40) from grouped model output.
@@ -183,7 +183,7 @@ The **Evaluate Document Details for Consistent and New Importance Topics and Out
 * Displays topic importance plot.
 * Writes dataframe to Excel worksheet to support Tableau visualization.
 
-The **Output multiple topics for visualization** code cells:
+The **"Output multiple topics for visualization"** code cells:
 * Creates new dataframe with topic importances for "Example Topics" (topics 20, 74, 8, 40) from grouped model output.
 * Resets index.
 * Renames columns.
